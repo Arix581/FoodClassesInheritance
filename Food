@@ -1,0 +1,66 @@
+// Online C# Editor for free
+// Write, Edit and Run your C# code using C# Online Compiler
+
+using System;
+
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine ("Hello Mono World");
+        
+        //Pizza pizza = new Pizza(3, "pepperoni pizza", "dough", "cheese", "sause", "pepperoni");
+        Food bread = new Food(3f, "bread");
+        Food cheese = new Food(3f, "cheese");
+        Food sause = new Food(3f, "sause");
+        Food pepperoni = new Food(3f, "pepperoni");
+        Pizza pizza2 = new Pizza(bread, cheese, sause, pepperoni);
+        Console.WriteLine(pizza2.name + " is delicious!");
+        Console.WriteLine("We have made " + Food.totalFoodMade.ToString() + " foods in total!");
+    }
+}
+
+public class Food 
+{
+    public float hunger;
+    public string name;
+    static public int totalFoodMade;
+    
+    public Food(float hunger, string name)
+    {
+        this.hunger = hunger;
+        this.name = name;
+        Console.WriteLine("Made a new food named " + name + ".");
+        totalFoodMade++;
+    }
+    public Food()
+    {
+        totalFoodMade++;
+    }
+}
+
+public class Pizza : Food
+{
+    private string bread;
+    private string cheese;
+    private string sause;
+    private string topping;
+    
+    public Pizza(float hunger, string name, string bread, string cheese, string sause, string topping) : base(hunger, name)
+    {
+        this.bread = bread;
+        this.cheese = cheese;
+        this.sause = sause;
+        this.topping = topping;
+    }
+    
+    public Pizza(Food bread, Food cheese, Food sause, Food topping)
+    {
+        this.hunger = bread.hunger + cheese.hunger + sause.hunger + topping.hunger;
+        this.name = topping.name + " pizza";
+        this.bread = bread.name;
+        this.cheese = cheese.name;
+        this.sause = sause.name;
+        this.topping = topping.name;
+    }
+}
