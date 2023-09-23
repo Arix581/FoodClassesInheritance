@@ -9,12 +9,15 @@ public class HelloWorld
     {
         Console.WriteLine ("Hello Mono World");
         
-        //Pizza pizza = new Pizza(3, "pepperoni pizza", "dough", "cheese", "sause", "pepperoni");
+        Pizza pizza = new Pizza(3, "combo pizza", "dough", "cheese", "sause", "peppers, ground beef, and mushrooms");
         Food bread = new Food(3f, "bread");
         Food cheese = new Food(3f, "cheese");
         Food sause = new Food(3f, "sause");
         Food pepperoni = new Food(3f, "pepperoni");
         Pizza pizza2 = new Pizza(bread, cheese, sause, pepperoni);
+        
+        Console.WriteLine("");
+        pizza2.Eat();
         Console.WriteLine(pizza2.name + " is delicious!");
         Console.WriteLine("We have made " + Food.totalFoodMade.ToString() + " foods in total!");
     }
@@ -37,6 +40,14 @@ public class Food
     {
         totalFoodMade++;
     }
+    
+    public void Eat()
+    {
+        Console.WriteLine("You eat the " + name + ".");
+        Console.WriteLine("You restore " + hunger.ToString() + " hunger.");
+        hunger = (float)Math.Floor(hunger / 2);
+        Console.WriteLine("Next time you eat this " + name + ", it will only restore " + hunger.ToString() + " hunger.");
+    }
 }
 
 public class Pizza : Food
@@ -52,6 +63,8 @@ public class Pizza : Food
         this.cheese = cheese;
         this.sause = sause;
         this.topping = topping;
+        Console.WriteLine("You throw together a pizza made of " + bread + ", " + cheese + ", " + sause + ", and " + topping + ".");
+        Console.WriteLine("You name your creation, " + name + ".");
     }
     
     public Pizza(Food bread, Food cheese, Food sause, Food topping)
@@ -62,5 +75,6 @@ public class Pizza : Food
         this.cheese = cheese.name;
         this.sause = sause.name;
         this.topping = topping.name;
+        Console.WriteLine("You throw together a " + this.name + ".");
     }
 }
